@@ -42,7 +42,6 @@ export const Form = () => {
             <h1 className="w-100 text-center p-5 bg-dark text-light">Add new</h1>
             <div className="p-5">
                 <form className="row g-3 needs-validation">
-
                     <div className="col-md-6">
                         <label htmlFor="validationCustom01" className="form-label">Title</label>
                         <input type="text" className="form-control" id="validationCustom01" value={title} onChange={(event: ChangeEvent<HTMLInputElement>) => setTitle(event.target.value)} placeholder="John Doe" required />

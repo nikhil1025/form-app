@@ -16,7 +16,8 @@ export const Home = () => {
         const storedValues = localStorage.getItem("records");
         return storedValues ? JSON.parse(storedValues) : [];
     });
-    console.log(items);
+
+    let slno = 0;
 
     return (
         <div>
@@ -35,16 +36,18 @@ export const Home = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {items.map((data: any, index: number) => {
-                            if (data.range > 29 && data.range < 61 && !data.valid)
+                        {items.map((data: Record, index: number) => {
+                            if (data.range > 29 && data.range < 61 && data.valid) {
+                                slno++;
                                 return <tr key={index} className="record-row">
-                                    <th scope="row">{index}</th>
+                                    <th scope="row">{slno}</th>
                                     <td>{data.title}</td>
                                     <td>{data.description}</td>
                                     <td>{data.email}</td>
                                     <td>{data.range}</td>
                                     <td>{data.valid.toString()}</td>
                                 </tr>
+                            }
                             return <tr key={index} ></tr>;
                         })
                         }
