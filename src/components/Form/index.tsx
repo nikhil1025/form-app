@@ -33,6 +33,7 @@ export const Form = () => {
             const finalData: Record[] = [...recordList, data];
             localStorage.setItem("records", JSON.stringify(finalData));
         }
+        alert("Successfully Added");
     };
 
     return (
