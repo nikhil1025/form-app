@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 interface Record {
-    id: string;
+    id: number;
     title: string;
     description: 'desc1';
     email: 'test@test.com';
@@ -11,12 +11,11 @@ interface Record {
 
 export const Home = () => {
 
-    const [items, setItems] = useState<Record[]>([]);
-
-    useEffect(() => {
-        const recordList: Record[] = JSON.parse(localStorage.getItem("records") || "");
-        setItems(recordList);
-    }, []);
+    const [items, setItems] = useState<Record[]>(() => {
+        const storedValues = localStorage.getItem("records");
+        return storedValues ? JSON.parse(storedValues) : [];
+    });
+    console.log(items);
 
     return (
         <div>
@@ -34,9 +33,9 @@ export const Home = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {items?.map((data: any, index: number) => {
-                            if (data.range > 29 && data.range < 61 && data.valid)
-                                return <tr key={data.id} className="record-row">
+                        {items.map((data: any, index: number) => {
+                            if (data.range > 29 && data.range < 61 && !data.valid)
+                                return <tr key={index} className="record-row">
                                     <th scope="row">{index}</th>
                                     <td>{data.title}</td>
                                     <td>{data.description}</td>
@@ -44,7 +43,7 @@ export const Home = () => {
                                     <td>{data.range}</td>
                                     <td>{data.valid.toString()}</td>
                                 </tr>
-                            return <></>;
+                            return <tr key={index} ></tr>;
                         })
                         }
                     </tbody>

@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 interface Record {
-    id: string;
+    id: number;
     title: string;
     description: string;
     email: string;
@@ -20,22 +20,26 @@ export const Form = () => {
 
     const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>): void => {
         event.preventDefault();
-        const recordList: Array<Record> = JSON.parse(localStorage.getItem("records") || "");
+        const storedValues = localStorage.getItem("records");
+        let recordList: Record[] = storedValues ? JSON.parse(storedValues) : [];
 
         const data: Record = {
-            id: uuidv4(),
+            id: recordList.length + 1,
             title, description, email, range, valid
         }
 
-        if (recordList)
-            localStorage.setItem("records", JSON.stringify([...recordList, data]));
+        if (recordList) {
+            recordList.push(data);
+            const finalData: Record[] = [...recordList, data];
+            console.log(finalData);
+            localStorage.setItem("records", JSON.stringify(finalData));
+        }
     };
 
     return (
         <div>
             <h1 className="w-100 text-center p-5 bg-dark text-light">Add new</h1>
             <div className="p-5">
-
                 <form className="row g-3 needs-validation">
 
                     <div className="col-md-6">
