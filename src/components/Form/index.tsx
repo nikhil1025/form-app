@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
 interface Record {
@@ -29,15 +30,14 @@ export const Form = () => {
         }
 
         if (recordList) {
-            recordList.push(data);
             const finalData: Record[] = [...recordList, data];
-            console.log(finalData);
             localStorage.setItem("records", JSON.stringify(finalData));
         }
     };
 
     return (
         <div>
+            <Link to="/">List Page</Link>
             <h1 className="w-100 text-center p-5 bg-dark text-light">Add new</h1>
             <div className="p-5">
                 <form className="row g-3 needs-validation">

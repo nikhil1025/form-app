@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 
 interface Record {
     id: number;
@@ -19,6 +20,7 @@ export const Home = () => {
 
     return (
         <div>
+            <Link to="/create">Form Page</Link>
             <h1 className="w-100 text-center p-5 bg-dark text-light">Records</h1>
             <div className="p-5">
                 <table className="table">
